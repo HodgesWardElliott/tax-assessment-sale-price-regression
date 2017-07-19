@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 For this modeling exercise, the data has already been downloaded and joined:
 
-```{r, message=FALSE, warning=FALSE}
+```{r load data, message=FALSE, warning=FALSE}
 sale_augmented <- read_rds("data/sales_augmented.rds")
 ```
 
@@ -148,6 +148,7 @@ by_group
 Next, using `purrr::map` and `broom::glance` we can apply various functions over the nested data frames in order to fit models and extract summary statistics:
 
 ```{r show models}
+
 by_group %>% 
   mutate(Number_of_Sales = map_dbl(data,nrow)) %>% 
   mutate(model = map(data, group_model)) %>% 
@@ -155,7 +156,8 @@ by_group %>%
   mutate(glance = map(model, broom::glance)) %>% 
   unnest(glance) %>% 
   arrange(-adj.r.squared) %>% 
-  filter(p.value <= (0.05))
+  filter(p.value <= (0.05)) %>% 
+  glimpse()
 
 ```
 

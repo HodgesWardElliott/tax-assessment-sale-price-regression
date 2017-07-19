@@ -258,33 +258,28 @@ by_group %>%
   mutate(glance = map(model, broom::glance)) %>% 
   unnest(glance) %>% 
   arrange(-adj.r.squared) %>% 
-  filter(p.value <= (0.05))
+  filter(p.value <= (0.05)) %>% 
+  glimpse()
 ```
 
-    ## # A tibble: 17 x 16
-    ##    Building_Type                   data Number_of_Sales    model
-    ##            <chr>                 <list>           <dbl>   <list>
-    ##  1             L     <tibble [819 x 5]>             819 <S3: lm>
-    ##  2             O   <tibble [3,503 x 5]>            3503 <S3: lm>
-    ##  3             N     <tibble [132 x 5]>             132 <S3: lm>
-    ##  4             H   <tibble [8,726 x 5]>            8726 <S3: lm>
-    ##  5             F   <tibble [2,636 x 5]>            2636 <S3: lm>
-    ##  6             E   <tibble [3,327 x 5]>            3327 <S3: lm>
-    ##  7             B <tibble [126,091 x 5]>          126091 <S3: lm>
-    ##  8             S  <tibble [17,402 x 5]>           17402 <S3: lm>
-    ##  9             G   <tibble [8,070 x 5]>            8070 <S3: lm>
-    ## 10             K   <tibble [9,499 x 5]>            9499 <S3: lm>
-    ## 11             A <tibble [142,046 x 5]>          142046 <S3: lm>
-    ## 12             V  <tibble [14,529 x 5]>           14529 <S3: lm>
-    ## 13             M     <tibble [921 x 5]>             921 <S3: lm>
-    ## 14             I     <tibble [520 x 5]>             520 <S3: lm>
-    ## 15             D <tibble [114,460 x 5]>          114460 <S3: lm>
-    ## 16             W     <tibble [515 x 5]>             515 <S3: lm>
-    ## 17             Z   <tibble [1,621 x 5]>            1621 <S3: lm>
-    ## # ... with 12 more variables: Sale_Coef <dbl>, r.squared <dbl>,
-    ## #   adj.r.squared <dbl>, sigma <dbl>, statistic <dbl>, p.value <dbl>,
-    ## #   df <int>, logLik <dbl>, AIC <dbl>, BIC <dbl>, deviance <dbl>,
-    ## #   df.residual <int>
+    ## Observations: 17
+    ## Variables: 16
+    ## $ Building_Type   <chr> "L", "O", "N", "H", "F", "E", "B", "S", "G", "...
+    ## $ data            <list> [<# A tibble: 819 x 5,                       ...
+    ## $ Number_of_Sales <dbl> 819, 3503, 132, 8726, 2636, 3327, 126091, 1740...
+    ## $ model           <list> [<1.594152e+06, 1.320010e-01, -1372752.29, 52...
+    ## $ Sale_Coef       <dbl> 0.13200104, 0.13088686, 0.11407901, 0.11723693...
+    ## $ r.squared       <dbl> 0.354059930, 0.332790155, 0.289172620, 0.20407...
+    ## $ adj.r.squared   <dbl> 0.353269305, 0.332599578, 0.283704718, 0.20398...
+    ## $ sigma           <dbl> 7875291.30, 22896266.51, 2403543.44, 5902366.8...
+    ## $ statistic       <dbl> 447.823220, 1746.224730, 52.885471, 2236.84038...
+    ## $ p.value         <dbl> 1.360568e-79, 5.494034e-310, 2.954454e-11, 0.0...
+    ## $ df              <int> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+    ## $ logLik          <dbl> -14166.208, -64333.076, -2125.696, -148426.537...
+    ## $ AIC             <dbl> 28338.415, 128672.153, 4257.392, 296859.073, 8...
+    ## $ BIC             <dbl> 28352.539, 128690.637, 4266.041, 296880.295, 8...
+    ## $ deviance        <dbl> 5.067051e+16, 1.835361e+18, 7.510127e+14, 3.03...
+    ## $ df.residual     <int> 817, 3501, 130, 8724, 2634, 3325, 126089, 1740...
 
 The top building classes are:
 
